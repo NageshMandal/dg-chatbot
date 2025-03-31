@@ -1,0 +1,687 @@
+{
+    "intent_patterns": [
+    { "pattern": "training|certification", "node": "training_certification" },
+    { "pattern": "exam|retake|certificate", "node": "exam_certification" },
+    { "pattern": "job|career|resume|internship", "node": "job_opportunities" },
+    { "pattern": "partner|collaborate|affiliate", "node": "partner_with" },
+    { "pattern": "support|help|technical", "node": "technical_support" },
+    { "pattern": "faq|question|general", "node": "faq_general" },
+    { "pattern": "consult|itil|iso|compliance", "node": "consultancy_menu" },
+    { "pattern": "payment|fees|charges|emi", "node": "faq_payment" },
+    { "pattern": "demo|preview|trial", "node": "faq_demo" },
+    { "pattern": "schedule|timetable|upcoming", "node": "faq_schedule" },
+    { "pattern": "discount|offer|deal", "node": "faq_offers" },
+    { "pattern": "material|course content|resources", "node": "faq_materials" },
+    { "pattern": "brochure", "node": "faq_brochure" },
+    { "pattern": "refund|cancel", "node": "faq_refund" },
+    { "pattern": "access|lms", "node": "faq_lms" },
+    { "pattern": "whatsapp|telegram", "node": "faq_whatsapp" },
+    { "pattern": "placement|job assistance", "node": "faq_placement" },
+    { "pattern": "contact", "node": "faq_contact" },
+    { "pattern": "language", "node": "faq_languages" },
+    { "pattern": "^(hi+|hello+|hey+)\\b", "node": "general_greeting" },
+    { "pattern": "thank(s| you)?", "node": "general_thanks" },
+    { "pattern": "bye|goodbye|see you|exit", "node": "general_bye" },
+    { "pattern": "don[’']?t understand|confused|help me", "node": "faq_general" }
+  ],
+  "start": {
+    "question": "Please select your language:",
+    "options": {
+      "English": { "next": "main_menu" },
+      "Hindi": { "next": "main_menu" },
+      "Arabic": { "next": "main_menu" }
+    }
+  },
+  "main_menu": {
+    "question": "Welcome! Please choose a service:",
+    "options": {
+      "Consultancy Services": { "next": "consultancy_menu" },
+      "Training & Certifications": { "next": "training_certification" },
+      "Exam & Certification Info": { "next": "exam_certification" },
+      "Partner with Us": { "next": "partner_with" },
+      "Job Opportunities": { "next": "job_opportunities" },
+      "Technical Support": { "next": "technical_support" },
+      "General FAQ": { "next": "general_help" }
+    }
+  },
+  "consultancy_menu": {
+    "question": "Select a consultancy option:",
+    "options": {
+      "ITIL Process": { "next": "itil_meeting" },
+      "ISO Compliance Services": { "next": "iso_meeting" },
+      "Corporate Training Inquiry": { "next": "training_meeting" },
+      "ITSM Software Review": { "next": "itsm_meeting" }
+    }
+  },
+  "itil_meeting": {
+    "question": "Would you like to request a meeting for ITIL Process?",
+    "options": {
+      "Yes": { "next": "confirm_meeting" },
+      "No": { "next": null }
+    }
+  },
+  "iso_meeting": {
+    "question": "Would you like to request a meeting for ISO Compliance?",
+    "options": {
+      "Yes": { "next": "confirm_meeting" },
+      "No": { "next": null }
+    }
+  },
+  "confirm_meeting": {
+    "question": "✅ Your request has been submitted. Our team will contact you shortly.",
+    "options": {}
+  },
+  "exam_certification": {
+    "question": "Please select your exam-related service:",
+    "options": {
+      "Exam Registration": { "next": "exam_registration" },
+      "Exam Rescheduling": { "next": "exam_rescheduling" },
+      "Certificate Download": { "next": "certificate_download" },
+      "Exam Retake Request": { "next": "exam_retake_request" },
+      "Exam Proctoring Support": { "next": "exam_proctoring_support" }
+    }
+  },
+  "confirm_slot_registration": {
+    "question": "Confirm Slot?",
+    "options": {
+      "Yes": { "next": "exam_registered" },
+      "No": { "next": "session_end" }
+    }
+  },
+  "exam_registered": {
+    "question": "✅ Exam Registered Successfully.",
+    "options": {
+      "End Session": { "next": "session_end" }
+    }
+  },
+  "exam_rescheduling": {
+    "question": "Check Availability for Reschedule:",
+    "options": {
+      "Available": { "next": "confirm_new_date" },
+      "Not Available": { "next": "session_end" }
+    }
+  },
+  "confirm_new_date": {
+    "question": "Confirm New Date?",
+    "options": {
+      "Yes": { "next": "exam_rescheduled" },
+      "No": { "next": "session_end" }
+    }
+  },
+  "exam_rescheduled": {
+    "question": "✅ Exam Rescheduled Successfully.",
+    "options": {
+      "End Session": { "next": "session_end" }
+    }
+  },
+  "certificate_download": {
+    "question": "Login to Portal",
+    "options": {
+      "Logged In": { "next": "certificate_portal" }
+    }
+  },
+  "certificate_portal": {
+    "question": "Download Certificate Now?",
+    "options": {
+      "Yes": { "next": "certificate_downloaded" },
+      "No": { "next": "session_end" }
+    }
+  },
+  "certificate_downloaded": {
+    "question": "✅ Certificate Downloaded Successfully.",
+    "options": {
+      "End Session": { "next": "session_end" }
+    }
+  },
+  "exam_retake_request": {
+    "question": "Check Retake Options",
+    "options": {
+      "Available": { "next": "confirm_payment" }
+    }
+  },
+  "confirm_payment": {
+    "question": "Confirm Payment?",
+    "options": {
+      "Yes": { "next": "retake_scheduled" },
+      "No": { "next": "session_end" }
+    }
+  },
+  "retake_scheduled": {
+    "question": "✅ Retake Scheduled Successfully.",
+    "options": {
+      "End Session": { "next": "session_end" }
+    }
+  },
+  "exam_proctoring_support": {
+    "question": "Connect to Live Support?",
+    "options": {
+      "Yes": { "next": "live_learn_support" },
+      "No": { "next": "session_end" }
+    }
+  },
+  "live_learn_support": {
+    "question": "✅ You are now connected to Live Support.",
+    "options": {
+      "End Session": { "next": "session_end" }
+    }
+  },
+  "partner_with": {
+    "question": "How would you like to partner with us?",
+    "options": {
+      "Accredited Partner Inquiry": { "next": "accredited_partner" },
+      "Collaboration Inquiry": { "next": "collaboration_inquiry" },
+      "Affiliate Program Inquiry": { "next": "affiliate_program" }
+    }
+  },
+  "partner_submitted": {
+    "question": "✅ Confirmation Email Sent. Partnership Request Submitted.",
+    "options": {
+      "End Session": { "next": "session_end" }
+    }
+  },
+  "job_opportunities": {
+    "question": "Please choose a job-related service:",
+    "options": {
+      "View Open Positions": { "next": "view_jobs" },
+      "Internship Inquiry": { "next": "internship_inquiry" }
+    }
+  },
+  "view_jobs": {
+    "question": "Would you like to apply for a job?",
+    "options": {
+      "Apply": { "next": "apply_jobs" }
+    }
+  },
+  "apply_jobs": {
+    "question": "Would you like to apply for a job?",
+    "options": {
+      "Submit Resume": { "next": "submit_cv" }
+    }
+  },
+  "job_application_submitted": {
+    "question": "✅ Job Application Submitted.",
+    "options": {
+      "End Session": { "next": "session_end" }
+    }
+  },
+  "resume_submitted": {
+    "question": "✅ Resume Submitted.",
+    "options": {
+      "End Session": { "next": "session_end" }
+    }
+  },
+  "internship_inquiry": {
+    "question": "Check Internship Availability?",
+    "options": {
+      "Check Availability": { "next": "internship_check" }
+    }
+  },
+  "internship_check": {
+    "question": "Would you like to apply now?",
+    "options": {
+      "Apply Now": { "next": "internship_application_submitted" }
+    }
+  },
+  "internship_application_submitted": {
+    "question": "✅ Internship Application Submitted.",
+    "options": {
+      "End Session": { "next": "session_end" }
+    }
+  },
+  "training_certification": {
+    "question": "Select a Training:",
+    "options": {
+      "ITIL® Course": { "next": "itil_course" },
+      "PRINCE2® & Project Management": { "next": "pm_course" },
+      "Agile & Scrum": { "next": "agile_course" },
+      "DevOps & ISO Standards": { "next": "devops_course" }
+    }
+  },
+  "itil_course": {
+  "question": "View Syllabus & Fees",
+  "card": {
+    "title": "ITIL® Course Overview",
+    "description": "Master ITIL practices with globally recognized certification.",
+    "duration": "3 Weeks",
+    "fees": "$299",
+    "features": [
+      "Live Sessions",
+      "Certified Trainers",
+      "Official Exam Voucher",
+      "24/7 LMS Access"
+    ]
+  },
+  "options": {
+    "Enroll Now": { "next": "enroll_itil" }
+  }
+},
+  "pm_course": {
+    "question": "View Syllabus & Fees",
+    "options": {
+      "Show PM Details": { "next": "enroll_pm" }
+    }
+  },
+  "agile_course": {
+    "question": "View Syllabus & Fees",
+    "options": {
+      "Show Agile Details": { "next": "enroll_agile" }
+    }
+  },
+  "devops_course": {
+    "question": "View Syllabus & Fees",
+    "options": {
+      "Show DevOps Details": { "next": "enroll_devops" }
+    }
+  },
+  "enrollment_completed": {
+    "question": "✅ Enrollment Completed.",
+    "options": {
+      "End Session": { "next": "session_end" }
+    }
+  },
+  "technical_support": {
+    "question": "Select Issue:",
+    "options": {
+      "Exam/Shield Software Issue": { "next": "exam_shield" },
+      "Course Access Problem": { "next": "course_access" },
+      "Payment & Billing Issue": { "next": "billing_payment" },
+      "Result Withheld": { "next": "result_withheld" },
+      "Other Technical Issues": { "next": "other_tech" }
+    }
+  },
+  "exam_shield": {
+    "question": "Run System Test",
+    "options": {
+      "System Test": { "next": "issue_resolved" }
+    }
+  },
+  "course_access": {
+    "question": "Check LMS Credentials",
+    "options": {
+      "LMS Test": { "next": "issue_resolved" }
+    }
+  },
+  "billing_payment": {
+    "question": "View Transaction History",
+    "options": {
+      "Payment Status": { "next": "payment_status" }
+    }
+  },
+  "payment_status": {
+    "question": "Need More Help?",
+    "options": {
+      "Yes": { "next": "live_agent" },
+      "No": { "next": "issue_resolved" }
+    }
+  },
+  "result_withheld": {
+    "question": "Verify Identity",
+    "options": {
+      "Identity Check": { "next": "identity_check" }
+    }
+  },
+  "identity_check": {
+    "question": "Need More Help?",
+    "options": {
+      "Yes": { "next": "live_agent" },
+      "No": { "next": "issue_resolved" }
+    }
+  },
+  "other_tech": {
+    "question": "Connect to Support Team",
+    "options": {
+      "Escalate to Support": { "next": "live_agent" }
+    }
+  },
+  "live_agent": {
+    "question": "🔄 Connecting to Live Agent...",
+    "options": {
+      "End Session": { "next": "issue_resolved" }
+    }
+  },
+  "issue_resolved": {
+    "question": "✅ Support Issue Resolved.",
+    "options": {
+      "End Session": { "next": "session_end" }
+    }
+  },
+  "session_end": {
+    "question": "👋 Thank you! Your session has ended.",
+    "options": {}
+  },
+  "general_help": {
+    "question": "How can we help you today?",
+    "options": {
+      "Training Questions": { "next": "faq_training" },
+      "Exam & Certification FAQs": { "next": "faq_exams" },
+      "Technical Help": { "next": "faq_technical" },
+      "General Inquiry": { "next": "faq_general" }
+    }
+  },
+  "faq_training": {
+    "question": "Here are some frequently asked questions about training.",
+    "options": {
+      "Provide Answers": { "next": "faq_resolved" }
+    }
+  },
+  "faq_exams": {
+    "question": "Here are some frequently asked questions about exams and certification.",
+    "options": {
+      "Provide Answers": { "next": "faq_resolved" }
+    }
+  },
+  "faq_technical": {
+    "question": "Here are some frequently asked questions related to technical help.",
+    "options": {
+      "Provide Answers": { "next": "faq_resolved" }
+    }
+  },
+  "faq_general": {
+    "question": "Here are some general FAQs.",
+    "options": {
+      "Provide Answers": { "next": "faq_resolved" }
+    }
+  },
+  "faq_resolved": {
+    "question": "Did this help?",
+    "options": {
+      "Yes": { "next": "user_ends" },
+      "No": { "next": "user_satisfied" }
+    }
+  },
+  "user_satisfied": {
+    "question": "Let us know how we can further assist you.",
+    "options": {
+      "End Session": { "next": "user_ends" }
+    }
+  },
+  "user_ends": {
+    "question": "👋 Thank you! Your session has ended.",
+    "options": {}
+  },
+  "general_greeting": {
+    "question": "👋 Hello! How can I assist you today?",
+    "options": {
+      "Go to Main Menu": { "next": "main_menu" }
+    }
+  },
+  "general_thanks": {
+    "question": "😊 You're welcome! Let me know if you need anything else.",
+    "options": {
+      "Back to Main Menu": { "next": "main_menu" }
+    }
+  },
+  "general_bye": {
+    "question": "👋 Goodbye! Feel free to chat again anytime.",
+    "options": {}
+  },
+  "faq_certificates": {
+    "question": "Yes, all our courses come with globally recognized certifications upon successful completion.",
+    "options": {
+      "Go to Main Menu": { "next": "main_menu" }
+    }
+  },
+  "faq_demo": {
+    "question": "Absolutely! We provide free demo sessions for select courses. Contact us to schedule your demo.",
+    "options": {
+      "Go to Main Menu": { "next": "main_menu" }
+    }
+  },
+  "faq_courses": {
+    "question": "We offer IT training in cloud computing, cybersecurity, data analytics, AI/ML, PMP, and more. Visit our website for details.",
+    "options": {
+      "Go to Main Menu": { "next": "main_menu" }
+    }
+  },
+  "faq_payment": {
+    "question": "We accept credit/debit cards, net banking, UPI, and EMI options for certain courses.",
+    "options": {
+      "Go to Main Menu": { "next": "main_menu" }
+    }
+  },
+  "faq_schedule": {
+    "question": "Check our upcoming schedule on the website.",
+    "options": {
+      "Go to Main Menu": { "next": "main_menu" }
+    }
+  },
+  "faq_offers": {
+    "question": "Yes, we have exclusive discounts for early enrollments and group bookings.",
+    "options": {
+      "Go to Main Menu": { "next": "main_menu" }
+    }
+  },
+  "faq_materials": {
+    "question": "You will get access to course materials via our Learning Management System (LMS) after enrollment.",
+    "options": {
+      "Go to Main Menu": { "next": "main_menu" }
+    }
+  },
+  "faq_reschedule": {
+    "question": "Yes, training sessions can be rescheduled based on availability. Please contact support.",
+    "options": {
+      "Go to Main Menu": { "next": "main_menu" }
+    }
+  },
+  "faq_missed_session": {
+    "question": "If you miss a session, you can access recorded lectures in LMS or schedule a 1-on-1 with the trainer.",
+    "options": {
+      "Go to Main Menu": { "next": "main_menu" }
+    }
+  },
+  "faq_exam_queries": {
+    "question": "You can contact our certification support team for queries regarding exam registration and scheduling.",
+    "options": {
+      "Go to Main Menu": { "next": "main_menu" }
+    }
+  },
+  "faq_tech_support": {
+    "question": "Technical support is available via chat, email, phone, and LMS helpdesk.",
+    "options": {
+      "Go to Main Menu": { "next": "main_menu" }
+    }
+  },
+  "faq_whatsapp": {
+    "question": "You can reach us on WhatsApp or Telegram at [insert number].",
+    "options": {
+      "Go to Main Menu": { "next": "main_menu" }
+    }
+  },
+  "faq_brochure": {
+    "question": "You can download our course brochure from the website or request one via email.",
+    "options": {
+      "Go to Main Menu": { "next": "main_menu" }
+    }
+  },
+  "faq_refund": {
+    "question": "Refunds are processed based on our policy. Contact support or see our T&Cs for more info.",
+    "options": {
+      "Go to Main Menu": { "next": "main_menu" }
+    }
+  },
+  "faq_lms": {
+    "question": "Login credentials for the LMS are shared post-enrollment. Use 'Forgot Password' if needed.",
+    "options": {
+      "Go to Main Menu": { "next": "main_menu" }
+    }
+  },
+  "faq_placement": {
+    "question": "We offer career guidance and job placement assistance for select courses.",
+    "options": {
+      "Go to Main Menu": { "next": "main_menu" }
+    }
+  },
+  "faq_contact": {
+    "question": "You can contact us via chat, email, phone, or WhatsApp for any queries.",
+    "options": {
+      "Go to Main Menu": { "next": "main_menu" }
+    }
+  },
+  "faq_languages": {
+    "question": "Most of our courses are in English. Training in other languages is available on request.",
+    "options": {
+      "Go to Main Menu": { "next": "main_menu" }
+    }
+  },
+  "faq_services": {
+    "question": "Ducis Group offers IT training, corporate learning solutions, e-learning, and technology consulting.",
+    "options": {
+      "Go to Main Menu": { "next": "main_menu" }
+    }
+  },
+  "faq_location": {
+    "question": "Our headquarters is at [company address], but we also provide online and in-person training.",
+    "options": {
+      "Go to Main Menu": { "next": "main_menu" }
+    }
+  },
+  "faq_duration": {
+    "question": "Course durations vary—some are a few days, others can span weeks or months.",
+    "options": {
+      "Go to Main Menu": { "next": "main_menu" }
+    }
+  },
+  "faq_lifetime_access": {
+    "question": "Some courses provide lifetime access; others have time-limited access. Check course details.",
+    "options": {
+      "Go to Main Menu": { "next": "main_menu" }
+    }
+  },
+  "faq_job_assist": {
+    "question": "We provide job assistance including resume-building and career guidance.",
+    "options": {
+      "Go to Main Menu": { "next": "main_menu" }
+    }
+  },
+  "submit_cv": {
+    "question": "Please upload your resume (PDF/DOC):",
+    "input": "file",
+    "options": {
+      "Done": { "next": "resume_submitted" }
+    }
+  },
+  "training_meeting": {
+    "question": "Please enter your company name and training needs:",
+    "input": "textarea",
+    "options": {
+      "Submit": { "next": "confirm_meeting" }
+    }
+  },
+  "itsm_meeting": {
+    "question": "Please upload your ITSM tool documentation or summary:",
+    "input": "file",
+    "options": {
+      "Upload Done": { "next": "confirm_meeting" }
+    }
+  },
+  "accredited_partner": {
+    "question": "Please enter your organization details:",
+    "input": "textarea",
+    "options": {
+      "Submit Application": { "next": "partner_submitted" }
+    }
+  },
+  "collaboration_inquiry": {
+    "question": "Please describe your collaboration proposal:",
+    "input_type": "form",
+    "placeholder": "e.g., We’d like to co-host a webinar",
+    "options": {
+      "Request Meeting": { "next": "partner_submitted" }
+    }
+  },
+  "affiliate_program": {
+    "question": "Enter your name and email to sign up as affiliate:",
+    "input": "text",
+    "options": {
+      "Sign Up": { "next": "partner_submitted" }
+    }
+  },
+  "exam_registration": {
+    "question": "Select Exam Type and enter your Candidate ID:",
+    "input": "text",
+    "options": {
+      "Exam Type A": { "next": "confirm_slot_registration" },
+      "Exam Type B": { "next": "confirm_slot_registration" }
+    }
+  },
+  "enroll_itil": {
+  "question": "Let’s get you enrolled. What is your full name?",
+  "input": "form",
+  "placeholder": "e.g. John Doe",
+  "options": {
+    "Next": { "next": "enroll_itil_email" }
+  }
+},
+"enroll_itil_email": {
+  "question": "Thanks! Now enter your email address:",
+  "input": "form",
+  "placeholder": "e.g. john@example.com",
+  "options": {
+    "Submit": {
+      "next": "confirm_enrollment",
+      "callback": "submitEnrollmentData"
+    }
+  }
+},
+"confirm_enrollment": {
+  "question": "✅ Enrollment Completed. Our team will contact you soon.",
+  "options": {
+    "Go to Main Menu": { "next": "main_menu" }
+  }
+},
+  "enroll_pm": {
+    "question": "Please enter your full name and email to enroll:",
+    "input": "text",
+    "options": {
+      "Enroll Now": { "next": "confirm_enrollment" }
+    }
+  },
+  "enroll_agile": {
+    "question": "Please enter your full name and email to enroll:",
+    "input": "text",
+    "options": {
+      "Enroll Now": { "next": "confirm_enrollment" }
+    }
+  },
+  "enroll_devops": {
+    "question": "Please enter your full name and email to enroll:",
+    "input": "text",
+    "options": {
+      "Enroll Now": { "next": "confirm_enrollment" }
+    }
+  },
+  "faq_feedback": {
+    "question": "Please share your feedback:",
+    "input": "textarea",
+    "options": {
+      "Submit": { "next": "main_menu" }
+    }
+  },
+  "user_info": {
+    "question": "Please provide your Name, Email, and Mobile number:",
+    "input": "form",
+    "placeholder": "Name, Email, Mobile Number",
+    "options": {
+      "Submit": { "next": "info_submitted" }
+    }
+  },
+  "info_submitted": {
+    "question": "Thank you for providing your contact details.",
+    "options": {
+      "Go to Main Menu": { "next": "main_menu" }
+    }
+  },
+  "screenshot_upload": {
+    "question": "Please upload your screenshot:",
+    "input": "file",
+    "options": {
+      "Upload": { "next": "upload_confirmed" }
+    }
+  },
+  "upload_confirmed": {
+    "question": "Screenshot received successfully.",
+    "options": {
+      "Go to Main Menu": { "next": "main_menu" }
+    }
+  }
+}
