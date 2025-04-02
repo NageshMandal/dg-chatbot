@@ -1,5 +1,3 @@
-// callback.js
-
 module.exports = {
     submitEnrollmentData: async function ({ session_id, tempForm, course }) {
       console.log("[CALLBACK] submitEnrollmentData invoked:", {

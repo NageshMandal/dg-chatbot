@@ -10,7 +10,10 @@
   "description": "",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "env": "^0.0.2",
     "express": "^4.21.2",
+    "mongoose": "^8.13.1",
     "multer": "^1.4.5-lts.2",
     "nlpjs": "^0.0.2",
     "node-nlp": "^5.0.0-alpha.5",

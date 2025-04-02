@@ -1,5 +1,5 @@
 {
-    "intent_patterns": [
+  "intent_patterns": [
     { "pattern": "training|certification", "node": "training_certification" },
     { "pattern": "exam|retake|certificate", "node": "exam_certification" },
     { "pattern": "job|career|resume|internship", "node": "job_opportunities" },
@@ -238,23 +238,21 @@
     }
   },
   "itil_course": {
-  "question": "View Syllabus & Fees",
-  "card": {
-    "title": "ITIL® Course Overview",
-    "description": "Master ITIL practices with globally recognized certification.",
-    "duration": "3 Weeks",
-    "fees": "$299",
-    "features": [
-      "Live Sessions",
-      "Certified Trainers",
-      "Official Exam Voucher",
-      "24/7 LMS Access"
-    ]
+    "question": "View Syllabus & Fees",
+    "card": {
+      "title": "ITIL® 4 Foundation eLearning + Exam Bundle",
+      "description": "The ITIL® 4 Foundation eLearning + Exam Bundle provides an easy means of preparing and taking the ITIL® 4 Foundation certification exam from Peoplecert.",
+      "price_india": "₹26000",
+      "price_usa": "$495",
+      "type": "elearning + Exam bundle",
+      "category": "ITIL 4",
+      "availability": "✅ Available",
+      "info": "The ITIL® 4 Foundation eLearning + Exam Bundle provides an easy means of preparing for and taking the ITIL® 4 Foundation certification exam."
+    },
+    "options": {
+      "Enroll Now": { "next": "enroll_itil" }
+    }
   },
-  "options": {
-    "Enroll Now": { "next": "enroll_itil" }
-  }
-},
   "pm_course": {
     "question": "View Syllabus & Fees",
     "options": {
@@ -605,30 +603,30 @@
     }
   },
   "enroll_itil": {
-  "question": "Let’s get you enrolled. What is your full name?",
-  "input": "form",
-  "placeholder": "e.g. John Doe",
-  "options": {
-    "Next": { "next": "enroll_itil_email" }
-  }
-},
-"enroll_itil_email": {
-  "question": "Thanks! Now enter your email address:",
-  "input": "form",
-  "placeholder": "e.g. john@example.com",
-  "options": {
-    "Submit": {
-      "next": "confirm_enrollment",
-      "callback": "submitEnrollmentData"
+    "question": "Let’s get you enrolled. What is your full name?",
+    "input": "form",
+    "placeholder": "e.g. John Doe",
+    "options": {
+      "Next": { "next": "enroll_itil_email" }
     }
-  }
-},
-"confirm_enrollment": {
-  "question": "✅ Enrollment Completed. Our team will contact you soon.",
-  "options": {
-    "Go to Main Menu": { "next": "main_menu" }
-  }
-},
+  },
+  "enroll_itil_email": {
+    "question": "Thanks! Now enter your email address:",
+    "input": "form",
+    "placeholder": "e.g. john@example.com",
+    "options": {
+      "Submit": {
+        "next": "confirm_enrollment",
+        "callback": "submitEnrollmentData"
+      }
+    }
+  },
+  "confirm_enrollment": {
+    "question": "✅ Enrollment Completed. Our team will contact you soon.",
+    "options": {
+      "Go to Main Menu": { "next": "main_menu" }
+    }
+  },
   "enroll_pm": {
     "question": "Please enter your full name and email to enroll:",
     "input": "text",
@@ -683,5 +681,1295 @@
     "options": {
       "Go to Main Menu": { "next": "main_menu" }
     }
-  }
+  },
+  "itil_course_create_deliver_support": {
+      "question": "View Syllabus & Fees",
+      "card": {
+        "title": "ITIL® 4 Create, Deliver Support + Exam Bundle + Take2",
+        "description": "The ITIL® 4 Specialist: Create, Deliver & Support (CDS) course helps learners integrate different value streams and activities to create, deliver and support IT-enabled products and services.",
+        "price_india": "₹34000",
+        "price_usa": "$675",
+        "type": "elearning + Exam bundle",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Helps learners integrate different value streams and activities to deliver and support IT-enabled products and services."
+      },
+      "options": {
+        "Enroll Now": { "next": "enroll_itil_course_create_deliver_support" }
+      }
+    },
+    "itil_course_high_velocity": {
+      "question": "View Syllabus & Fees",
+      "card": {
+        "title": "ITIL® 4 High Velocity IT + Exam Bundle",
+        "description": "The ITIL® 4 Specialist: High Velocity IT (HVIT) helps understand how digital enterprises focus on rapid delivery of products and services in high velocity environments to gain maximum value.",
+        "price_india": "₹34000",
+        "price_usa": "$675",
+        "type": "elearning + Exam bundle",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Focuses on rapid delivery and high-velocity environments in digital enterprises."
+      },
+      "options": {
+        "Enroll Now": { "next": "enroll_itil_course_high_velocity" }
+      }
+    },
+    "itil_course_direct_plan_improve": {
+      "question": "View Syllabus & Fees",
+      "card": {
+        "title": "ITIL® 4 Direct, Plan and Improve + Exam Bundle + Take2",
+        "description": "The ITIL 4 Direct, Plan Improve (DPI) qualification focuses on the practical skills necessary to create a ‘learning and improving’ IT organization with a strong strategic direction.",
+        "price_india": "₹34000",
+        "price_usa": "$675",
+        "type": "elearning + Exam bundle",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Focuses on creating a learning and improving IT organization with effective strategic direction."
+      },
+      "options": {
+        "Enroll Now": { "next": "enroll_itil_course_direct_plan_improve" }
+      }
+    },
+    "itil_course_drive_support_validate": {
+      "question": "View Syllabus & Fees",
+      "card": {
+        "title": "ITIL® 4 Drive, Support and Validate + Exam Bundle + Take2",
+        "description": "The ITIL® 4 Specialist: Drive Stakeholder Value (DSV) focuses on engagement and interactions between stakeholders, covering concepts such as CX, UX, and journey mapping.",
+        "price_india": "₹34000",
+        "price_usa": "$675",
+        "type": "elearning + Exam bundle",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Covers engagement and interactions between service providers and their customers, users, suppliers, and partners."
+      },
+      "options": {
+        "Enroll Now": { "next": "enroll_itil_course_drive_support_validate" }
+      }
+    },
+    "p3o_foundation_voucher": {
+      "question": "View Voucher Details",
+      "card": {
+        "title": "P3O ® Foundation Exam Voucher",
+        "description": "Brings together a set of principles and techniques to help deliver projects or programmes within an organization or department.",
+        "price_india": "₹29500",
+        "price_usa": "$495",
+        "type": "Exam Voucher",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Portfolio, Programme and Project Offices (P3O®) Foundation Certification."
+      },
+      "options": {
+        "Buy Now": { "next": "buy_p3o_foundation_voucher" }
+      }
+    },
+    "p3o_practitioner_voucher": {
+      "question": "View Voucher Details",
+      "card": {
+        "title": "P3O ® PractitionerExam Voucher",
+        "description": "Demonstrates how to apply and tailor the P3O guidance in a practical context.",
+        "price_india": "₹30000",
+        "price_usa": "$500",
+        "type": "Exam Voucher",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "P3O® Practitioner Certification Voucher."
+      },
+      "options": {
+        "Buy Now": { "next": "buy_p3o_practitioner_voucher" }
+      }
+    },
+    "mop_foundation_voucher": {
+      "question": "View Voucher Details",
+      "card": {
+        "title": "MoP ® Foundation Voucher",
+        "description": "Provides the knowledge required to work as an informed member of a Portfolio Office.",
+        "price_india": "₹29500",
+        "price_usa": "$495",
+        "type": "Exam Voucher",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Foundation Portfolio Management Certification."
+      },
+      "options": {
+        "Buy Now": { "next": "buy_mop_foundation_voucher" }
+      }
+    },
+    "mop_practitioner_voucher": {
+      "question": "View Voucher Details",
+      "card": {
+        "title": "MoP® Practitioner Portfolio Management Certification Voucher",
+        "description": "Demonstrates an understanding of how to apply and tailor the MoP guidance in a practical context.",
+        "price_india": "₹30000",
+        "price_usa": "$500",
+        "type": "Exam Voucher",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Practitioner level certification for portfolio management."
+      },
+      "options": {
+        "Buy Now": { "next": "buy_mop_practitioner_voucher" }
+      }
+    },
+    "mov_foundation_voucher": {
+      "question": "View Voucher Details",
+      "card": {
+        "title": "MoV® Foundation Value Management Certification",
+        "description": "Helps you understand the MoV guidance and contribute effectively to value management activities.",
+        "price_india": "₹29500",
+        "price_usa": "$495",
+        "type": "Exam Voucher",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Foundation level value management certification."
+      },
+      "options": {
+        "Buy Now": { "next": "buy_mov_foundation_voucher" }
+      }
+    },
+    "mov_practitioner_voucher": {
+      "question": "View Voucher Details",
+      "card": {
+        "title": "MoV® Practitioner Value Management Certification",
+        "description": "Focuses on applying the principles of value management activities in real-life scenarios.",
+        "price_india": "₹30000",
+        "price_usa": "$500",
+        "type": "Exam Voucher",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Practitioner level value management certification."
+      },
+      "options": {
+        "Buy Now": { "next": "buy_mov_practitioner_voucher" }
+      }
+    },
+    "cobit5_foundation_voucher": {
+      "question": "View Voucher Details",
+      "card": {
+        "title": "COBIT® 5 Foundation Voucher",
+        "description": "Incorporates enterprise governance and management techniques with globally accepted principles and practices.",
+        "price_india": "₹17500",
+        "price_usa": "$245",
+        "type": "Exam Voucher",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "COBIT 5 Foundation Certification Voucher."
+      },
+      "options": {
+        "Buy Now": { "next": "buy_cobit5_foundation_voucher" }
+      }
+    },
+    "cobit5_assessor_voucher": {
+      "question": "View Voucher Details",
+      "card": {
+        "title": "COBIT® 5 Assessor Voucher",
+        "description": "Provides an end-to-end business view of the governance of enterprise IT.",
+        "price_india": "₹24500",
+        "price_usa": "$375",
+        "type": "Exam Voucher",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "COBIT® 5 Assessor Certification Voucher."
+      },
+      "options": {
+        "Buy Now": { "next": "buy_cobit5_assessor_voucher" }
+      }
+    },
+    "cobit5_implementation_voucher": {
+      "question": "View Voucher Details",
+      "card": {
+        "title": "COBIT® 5 Implementation Voucher",
+        "description": "Emphasizes the central role of IT in value creation by providing a business view of enterprise IT governance.",
+        "price_india": "₹24500",
+        "price_usa": "$375",
+        "type": "Exam Voucher",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "COBIT® 5 Implementation Certification Voucher."
+      },
+      "options": {
+        "Buy Now": { "next": "buy_cobit5_implementation_voucher" }
+      }
+    },
+    "six_sigma_yellow_belt_voucher": {
+      "question": "View Voucher Details",
+      "card": {
+        "title": "Six Sigma Yellow Belt Voucher from IASSC",
+        "description": "Focuses on breakthrough improvements by managing variation and reducing defects.",
+        "price_india": "₹16000",
+        "price_usa": "$225",
+        "type": "Exam Voucher",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Six Sigma Yellow Belt Certification Voucher."
+      },
+      "options": {
+        "Buy Now": { "next": "buy_six_sigma_yellow_belt_voucher" }
+      }
+    },
+    "six_sigma_green_belt_voucher": {
+      "question": "View Voucher Details",
+      "card": {
+        "title": "Six Sigma Green Belt Voucher from IASSC",
+        "description": "Focuses on breakthrough improvements by managing variation and reducing defects.",
+        "price_india": "₹20000",
+        "price_usa": "$315",
+        "type": "Exam Voucher",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Six Sigma Green Belt Certification Voucher."
+      },
+      "options": {
+        "Buy Now": { "next": "buy_six_sigma_green_belt_voucher" }
+      }
+    },
+    "six_sigma_belt_voucher": {
+      "question": "View Voucher Details",
+      "card": {
+        "title": "Six Sigma Belt Belt Voucher from IASSC",
+        "description": "Focuses on breakthrough improvements by managing variation and reducing defects.",
+        "price_india": "₹29000",
+        "price_usa": "$410",
+        "type": "Exam Voucher",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Six Sigma Belt Certification Voucher."
+      },
+      "options": {
+        "Buy Now": { "next": "buy_six_sigma_belt_voucher" }
+      }
+    },
+    "foundation_js_voucher": {
+      "question": "View Voucher Details",
+      "card": {
+        "title": "Foundation Javascript Exam Voucher",
+        "description": "Aimed at IT professionals seeking a globally recognized Peoplecert Devskills Foundation Javascript Certification.",
+        "price_india": "₹7000",
+        "price_usa": "N/A",
+        "type": "Exam Voucher",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Foundation Javascript Certification Voucher."
+      },
+      "options": {
+        "Buy Now": { "next": "buy_foundation_js_voucher" }
+      }
+    },
+    "advanced_java_voucher": {
+      "question": "View Voucher Details",
+      "card": {
+        "title": "Advanced Java Exam Voucher",
+        "description": "Aimed at IT professionals seeking a globally recognized Peoplecert Devskills Advanced Java Certification.",
+        "price_india": "₹9000",
+        "price_usa": "N/A",
+        "type": "Exam Voucher",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Advanced Java Certification Voucher."
+      },
+      "options": {
+        "Buy Now": { "next": "buy_advanced_java_voucher" }
+      }
+    },
+    "book_acquiring_managing_cloud_services": {
+      "question": "View Book Details",
+      "card": {
+        "title": "The ITIL Specialist: Acquiring & Managing Cloud Services",
+        "description": "Provides vendor-neutral, user-centric guidance on how cloud procurement and technology can support business strategy.",
+        "price_india": "₹7950",
+        "price_usa": "N/A",
+        "type": "Books",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Guidance on acquiring and managing cloud services."
+      },
+      "options": {
+        "View Details": { "next": "view_book_acquiring_managing_cloud_services" }
+      }
+    },
+    "book_sustainability_digital_it": {
+      "question": "View Book Details",
+      "card": {
+        "title": "The ITIL® 4 Sustainability in Digital & IT guidance",
+        "description": "Helps you understand the role of IT and digitally enabled services in relation to the environment and how to positively impact it.",
+        "price_india": "₹7950",
+        "price_usa": "N/A",
+        "type": "Books",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Sustainability guidance in digital and IT."
+      },
+      "options": {
+        "View Details": { "next": "view_book_sustainability_digital_it" }
+      }
+    },
+    "book_itil4_foundation_guidance": {
+      "question": "View Book Details",
+      "card": {
+        "title": "The ITIL 4 Foundation guidance",
+        "description": "Introduces an end-to-end operating model for the creation, delivery, and continual improvement of technology-enabled products and services.",
+        "price_india": "₹7950",
+        "price_usa": "N/A",
+        "type": "Books",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Foundation guidance for ITIL 4."
+      },
+      "options": {
+        "View Details": { "next": "view_book_itil4_foundation_guidance" }
+      }
+    },
+    "book_create_deliver_support": {
+      "question": "View Book Details",
+      "card": {
+        "title": "The ITIL® 4 Specialist: Create, Deliver & support (CDS)",
+        "description": "Helps learners integrate different value streams and activities to create, deliver and support IT-enabled products and services.",
+        "price_india": "₹7950",
+        "price_usa": "N/A",
+        "type": "Books",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Guidance for creating, delivering, and supporting IT-enabled services."
+      },
+      "options": {
+        "View Details": { "next": "view_book_create_deliver_support" }
+      }
+    },
+    "book_drive_stakeholder_value": {
+      "question": "View Book Details",
+      "card": {
+        "title": "ITIL4 Managing Professional Drive Stakeholder Value guidance",
+        "description": "Covers engagement and interaction between service providers and their stakeholders.",
+        "price_india": "₹7950",
+        "price_usa": "N/A",
+        "type": "Books",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Guidance on driving stakeholder value."
+      },
+      "options": {
+        "View Details": { "next": "view_book_drive_stakeholder_value" }
+      }
+    },
+    "book_high_velocity_it": {
+      "question": "View Book Details",
+      "card": {
+        "title": "The ITIL® 4 Specialist: High Velocity IT (HVIT)",
+        "description": "Helps understand how digital enterprises focus on rapid delivery of products and services in high velocity environments.",
+        "price_india": "₹7950",
+        "price_usa": "N/A",
+        "type": "Books",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "High Velocity IT guidance for rapid delivery."
+      },
+      "options": {
+        "View Details": { "next": "view_book_high_velocity_it" }
+      }
+    },
+    "book_direct_plan_improve": {
+      "question": "View Book Details",
+      "card": {
+        "title": "The ITIL 4 Direct, Plan Improve (DPI) qualification",
+        "description": "Focuses on the practical skills necessary to create a ‘learning and improving’ IT organization with a strong strategic direction.",
+        "price_india": "₹7950",
+        "price_usa": "N/A",
+        "type": "Books",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Guidance for direct, plan, and improve IT processes."
+      },
+      "options": {
+        "View Details": { "next": "view_book_direct_plan_improve" }
+      }
+    },
+    "book_digital_it_strategy": {
+      "question": "View Book Details",
+      "card": {
+        "title": "The ITIL4 Digital & IT strategy",
+        "description": "Provides guidance on ITIL concepts at a corporate strategy level, helping IT and digital leaders drive strategic business decisions.",
+        "price_india": "₹7950",
+        "price_usa": "N/A",
+        "type": "Books",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Digital and IT strategy guidance."
+      },
+      "options": {
+        "View Details": { "next": "view_book_digital_it_strategy" }
+      }
+    },
+    "book_prince2_foundation": {
+      "question": "View Book Details",
+      "card": {
+        "title": "PRINCE2® (Projects In Controlled Environments)",
+        "description": "A process-based method providing the essentials for project management and helping organizations successfully deliver new products and services.",
+        "price_india": "₹7950",
+        "price_usa": "N/A",
+        "type": "Books",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Foundation guidance for PRINCE2®."
+      },
+      "options": {
+        "View Details": { "next": "view_book_prince2_foundation" }
+      }
+    },
+    "book_prince2_agile": {
+      "question": "View Book Details",
+      "card": {
+        "title": "PRINCE2 Agile®",
+        "description": "Combines agile flexibility with the clearly defined framework of PRINCE2®, offering guidance on project delivery in an agile environment.",
+        "price_india": "₹7950",
+        "price_usa": "N/A",
+        "type": "Books",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Agile project management guidance."
+      },
+      "options": {
+        "View Details": { "next": "view_book_prince2_agile" }
+      }
+    },
+    "book_msp_guidance": {
+      "question": "View Book Details",
+      "card": {
+        "title": "The MSP guidance",
+        "description": "Addresses common challenges in leading investments in change, aligning programmes and projects to organizational strategy.",
+        "price_india": "₹7950",
+        "price_usa": "N/A",
+        "type": "Books",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Guidance for Managing Successful Programmes (MSP)."
+      },
+      "options": {
+        "View Details": { "next": "view_book_msp_guidance" }
+      }
+    },
+    "book_management_of_risk": {
+      "question": "View Book Details",
+      "card": {
+        "title": "Management of Risk: Creating and Protecting Value",
+        "description": "Offers a benefits and value-focused approach to risk management with practical guidance across industries and sectors.",
+        "price_india": "₹7950",
+        "price_usa": "N/A",
+        "type": "Books",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Risk management guidance for creating and protecting value."
+      },
+      "options": {
+        "View Details": { "next": "view_book_management_of_risk" }
+      }
+    },
+    "book_agileshift": {
+      "question": "View Book Details",
+      "card": {
+        "title": "AgileSHIFT",
+        "description": "Helps individuals and organizations create a culture of enterprise-wide agility to drive transformational change.",
+        "price_india": "₹7950",
+        "price_usa": "N/A",
+        "type": "Books",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Guidance for fostering agile transformation."
+      },
+      "options": {
+        "View Details": { "next": "view_book_agileshift" }
+      }
+    },
+    "book_p3o": {
+      "question": "View Book Details",
+      "card": {
+        "title": "P3O® (Portfolio, Programme and Project Offices)",
+        "description": "Provides universally applicable guidance with principles, processes, and techniques for effective portfolio, programme, and project management.",
+        "price_india": "₹7950",
+        "price_usa": "N/A",
+        "type": "Books",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Guidance on portfolio, programme, and project offices."
+      },
+      "options": {
+        "View Details": { "next": "view_book_p3o" }
+      }
+    },
+    "book_mov": {
+      "question": "View Book Details",
+      "card": {
+        "title": "MoV® (Management of Value)",
+        "description": "Provides essential guidance on maximising value and making better use of resources, considering both monetary and non-monetary benefits.",
+        "price_india": "₹7950",
+        "price_usa": "N/A",
+        "type": "Books",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Guidance on Management of Value."
+      },
+      "options": {
+        "View Details": { "next": "view_book_mov" }
+      }
+    },
+    "book_mop": {
+      "question": "View Book Details",
+      "card": {
+        "title": "The Management of Portfolios (MoP®)",
+        "description": "Provides guidance to senior executives and decision-makers on portfolio management principles and how to start and sustain progress.",
+        "price_india": "₹7950",
+        "price_usa": "N/A",
+        "type": "Books",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Guidance on managing portfolios."
+      },
+      "options": {
+        "View Details": { "next": "view_book_mop" }
+      }
+    },
+    "book_student_guide_sdi_sda_v8": {
+      "question": "View Book Details",
+      "card": {
+        "title": "Student Guide for SDI's SDA v8",
+        "description": "Helps service desk professionals understand the four key concepts that define the required skills, competencies, and knowledge.",
+        "price_india": "₹375",
+        "price_usa": "N/A",
+        "type": "Books",
+        "category": "ITIL 4",
+        "availability": "✅ Available",
+        "info": "Student guide for SDI's SDA v8 certification."
+      },
+      "options": {
+        "View Details": { "next": "view_book_student_guide_sdi_sda_v8" }
+      }
+    },
+  "faqData": [
+    {
+      "questions": [
+        "Do you provide certifications with your training?",
+        "Do you offer certifications with your training?"
+      ],
+      "answer": "Yes, all our courses come with globally recognized certifications upon successful completion. (link of the courses)"
+    },
+    {
+      "questions": [
+        "Can I get a demo session before enrolling?"
+      ],
+      "answer": "Absolutely! We provide free demo sessions for select courses to help you understand our teaching methods. Contact us to schedule your demo. (contact us link)"
+    },
+    {
+      "questions": [
+        "What IT training courses do you offer?"
+      ],
+      "answer": "We offer a wide range of IT training courses, including cloud computing, cybersecurity, data analytics, AI/ML, and project management certifications (PMP, Prince2), and more. Visit our website for the full catalog or chat with an expert! (link of the website)"
+    },
+    {
+      "questions": [
+        "What are the payment options available?"
+      ],
+      "answer": "We accept payments via credit/debit cards, net banking, UPI, and EMI options for certain courses."
+    },
+    {
+      "questions": [
+        "What is your upcoming schedule?"
+      ],
+      "answer": "Link of the schedule page on website"
+    },
+    {
+      "questions": [
+        "Do you have any ongoing discounts or offers?"
+      ],
+      "answer": "Yes, we have exclusive discounts for early enrollments and group bookings. Chat with our sales team to learn more! (contact us link)"
+    },
+    {
+      "questions": [
+        "How do I access my course materials?"
+      ],
+      "answer": "Once you enroll in a course, you will receive login credentials to our Learning Management System (LMS), where you can access all course materials, live sessions, and recorded lectures."
+    },
+    {
+      "questions": [
+        "Can I reschedule my training sessions?"
+      ],
+      "answer": "Yes, you can reschedule your training sessions based on availability. Please contact our support team for assistance."
+    },
+    {
+      "questions": [
+        "Who can I contact for certification exam queries?"
+      ],
+      "answer": "You can reach out to our certification support team at [contact email/phone] for assistance regarding exam registration, scheduling, and other queries."
+    },
+    {
+      "questions": [
+        "What if I miss a session?"
+      ],
+      "answer": "If you miss a session, you can access the recorded lecture in your LMS account. If needed, you can also schedule a one-on-one session with the trainer."
+    },
+    {
+      "questions": [
+        "How do I get technical support during the training?"
+      ],
+      "answer": "You can contact our technical support team via chat, email, or phone. We also have a dedicated helpdesk available through the LMS."
+    },
+    {
+      "questions": [
+        "Please share your WhatsApp/Telegram number.",
+        "What is your WhatsApp/Telegram number?"
+      ],
+      "answer": "You can reach us on WhatsApp/Telegram at [insert number]. Alternatively, you can chat with our support team on the website for quick assistance."
+    },
+    {
+      "questions": [
+        "What is Ducis Group?"
+      ],
+      "answer": "Ducis Group is a leading provider of IT training, corporate learning solutions, and technology consulting services."
+    },
+    {
+      "questions": [
+        "Where is Ducis Group located?"
+      ],
+      "answer": "Our headquarters is at [company address], but we offer online and in-person training."
+    },
+    {
+      "questions": [
+        "How long do your courses last?"
+      ],
+      "answer": "Course duration varies based on the program. Short courses can last a few days, while certification programs may take weeks or months."
+    },
+    {
+      "questions": [
+        "Do I get lifetime access to course materials?"
+      ],
+      "answer": "Some courses provide lifetime access to materials, while others have limited-time access. Check course details for specifics."
+    },
+    {
+      "questions": [
+        "Can I get a refund if I’m not satisfied with a course?"
+      ],
+      "answer": "We have a refund policy in place. Please refer to our terms and conditions or contact support for details."
+    },
+    {
+      "questions": [
+        "Do you offer corporate training programs?"
+      ],
+      "answer": "Yes, we provide customized corporate training for businesses, tailored to their specific needs."
+    },
+    {
+      "questions": [
+        "Can you develop a training program specific to my company’s needs?"
+      ],
+      "answer": "Absolutely! We offer customized learning solutions to meet the unique requirements of your team."
+    },
+    {
+      "questions": [
+        "How do I reset my password for the LMS?"
+      ],
+      "answer": "Click on the \"Forgot Password\" link on the LMS login page and follow the instructions."
+    },
+    {
+      "questions": [
+        "How do I provide feedback on a course or trainer?"
+      ],
+      "answer": "You can submit feedback through the LMS or email our support team."
+    },
+    {
+      "questions": [
+        "What services does Ducis Group offer?"
+      ],
+      "answer": "Ducis Group specializes in IT training, corporate learning solutions, e-learning platforms, and technology consulting. We provide training for individuals and enterprises in areas like cloud computing, cybersecurity, data analytics, AI/ML, and project management."
+    },
+    {
+      "questions": [
+        "Is Ducis Group accredited?"
+      ],
+      "answer": "Yes, our courses and certifications are globally recognized and accredited by industry-leading organizations."
+    },
+    {
+      "questions": [
+        "Do you offer training for beginners?"
+      ],
+      "answer": "Yes! We have courses for all levels—beginners, intermediate learners, and advanced professionals."
+    },
+    {
+      "questions": [
+        "Is the training online or in-person?"
+      ],
+      "answer": "We offer both online and in-person training, depending on the course. Check the course details for specific availability."
+    },
+    {
+      "questions": [
+        "Do you offer job placement assistance?"
+      ],
+      "answer": "Yes, we provide career guidance, resume-building sessions, and job placement assistance for select courses."
+    },
+    {
+      "questions": [
+        "Can I get a brochure of your courses?"
+      ],
+      "answer": "Yes, you can download our course brochure from our website or request one via email."
+    },
+    {
+      "questions": [
+        "How do I choose the right course for me?"
+      ],
+      "answer": "If you’re unsure about which course to take, our course advisors can help. Contact us for a free consultation."
+    },
+    {
+      "questions": [
+        "Do you provide hands-on projects?"
+      ],
+      "answer": "Yes, most of our courses include real-world projects and case studies to enhance learning."
+    },
+    {
+      "questions": [
+        "Can I enroll in multiple courses at once?"
+      ],
+      "answer": "Yes, you can enroll in multiple courses, and we may offer discounts for bundle enrollments."
+    },
+    {
+      "questions": [
+        "Do I need any prior knowledge to enroll in a course?"
+      ],
+      "answer": "Some courses require prerequisites, while others are beginner-friendly. Check the course details for requirements."
+    },
+    {
+      "questions": [
+        "Are your courses self-paced or instructor-led?"
+      ],
+      "answer": "We offer both self-paced and instructor-led training programs. You can choose the format that suits you best."
+    },
+    {
+      "questions": [
+        "Will I get lifetime access to the course content?"
+      ],
+      "answer": "Some courses provide lifetime access, while others have a limited duration. Check the course details for specific access information."
+    },
+    {
+      "questions": [
+        "What are your course fees?"
+      ],
+      "answer": "Our course fees vary based on the program and duration. You can find pricing details on our website or contact our team."
+    },
+    {
+      "questions": [
+        "Do you offer installment plans for course fees?"
+      ],
+      "answer": "Yes, we offer EMI options for select courses. Contact our support team for details."
+    },
+    {
+      "questions": [
+        "Are there any hidden charges?"
+      ],
+      "answer": "No, all fees are mentioned upfront. Any additional costs, such as certification exam fees, will be clearly communicated."
+    },
+    {
+      "questions": [
+        "Do you offer corporate discounts?"
+      ],
+      "answer": "Yes, we provide discounts for bulk enrollments and corporate training programs."
+    },
+    {
+      "questions": [
+        "Can I get an invoice for my payment?"
+      ],
+      "answer": "Yes, an invoice will be sent to your registered email after payment."
+    },
+    {
+      "questions": [
+        "What certifications will I receive after completing a course?"
+      ],
+      "answer": "You will receive globally recognized certifications from Ducis Group and, in some cases, from our partner institutions."
+    },
+    {
+      "questions": [
+        "Do you provide assistance with certification exams?"
+      ],
+      "answer": "Yes, we guide students through the certification process, including exam registration and preparation."
+    },
+    {
+      "questions": [
+        "Can I retake the certification exam if I fail?"
+      ],
+      "answer": "Yes, you can retake the exam. Some certification bodies have waiting periods and retake fees."
+    },
+    {
+      "questions": [
+        "How do I access the Learning Management System (LMS)?"
+      ],
+      "answer": "After enrollment, you will receive login credentials via email to access the LMS."
+    },
+    {
+      "questions": [
+        "I forgot my LMS password. How can I reset it?"
+      ],
+      "answer": "Click on the \"Forgot Password\" link on the LMS login page and follow the instructions."
+    },
+    {
+      "questions": [
+        "What devices can I use to access the courses?"
+      ],
+      "answer": "You can access the LMS on a laptop, tablet, or smartphone with an internet connection."
+    },
+    {
+      "questions": [
+        "Can I download course materials for offline use?"
+      ],
+      "answer": "Some materials are downloadable, while others are available only within the LMS."
+    },
+    {
+      "questions": [
+        "Who do I contact for technical issues?"
+      ],
+      "answer": "For technical support, reach out to our helpdesk via email, chat, or phone."
+    },
+    {
+      "questions": [
+        "Do you offer training for companies?"
+      ],
+      "answer": "Yes, we provide customized corporate training solutions for teams and organizations."
+    },
+    {
+      "questions": [
+        "Can Ducis Group develop custom training programs for my company?"
+      ],
+      "answer": "Absolutely! We offer tailored training programs based on your company’s requirements."
+    },
+    {
+      "questions": [
+        "Do you provide on-site corporate training?"
+      ],
+      "answer": "Yes, we offer both on-site and online corporate training sessions."
+    },
+    {
+      "questions": [
+        "Can we integrate your training with our internal LMS?"
+      ],
+      "answer": "Yes, we offer API integration and other solutions to integrate our training with your existing LMS."
+    },
+    {
+      "questions": [
+        "Do you offer white-label training solutions?"
+      ],
+      "answer": "Yes, we provide white-label training solutions that can be branded for your company."
+    },
+    {
+      "questions": [
+        "How can I contact your support team?"
+      ],
+      "answer": "You can reach us via chat, email, phone, or WhatsApp."
+    },
+    {
+      "questions": [
+        "What are your customer support hours?"
+      ],
+      "answer": "Our support team is available [insert hours] to assist you."
+    },
+    {
+      "questions": [
+        "How can I provide feedback on a course or trainer?"
+      ],
+      "answer": "You can submit feedback through the LMS or email our support team."
+    },
+    {
+      "questions": [
+        "How do I unsubscribe from marketing emails?"
+      ],
+      "answer": "You can unsubscribe by clicking the 'Unsubscribe' link in any marketing email or by contacting support."
+    },
+    {
+      "questions": [
+        "What is the mode of instruction for live classes?"
+      ],
+      "answer": "Our live classes are conducted via interactive virtual classrooms, where students can ask questions, participate in discussions, and access hands-on labs."
+    },
+    {
+      "questions": [
+        "Will I get a course completion certificate even if I don’t pass the exam?"
+      ],
+      "answer": "Yes, you will receive a course completion certificate, but certification from an external body (if applicable) may require passing an exam."
+    },
+    {
+      "questions": [
+        "What is the maximum number of students per batch?"
+      ],
+      "answer": "We keep our batch sizes small to ensure personalized attention. Typically, classes have 10-25 students depending on the course."
+    },
+    {
+      "questions": [
+        "Can I interact with trainers during the session?"
+      ],
+      "answer": "Yes, our instructor-led sessions are interactive, and you can ask questions in real time."
+    },
+    {
+      "questions": [
+        "Will I have access to trainers after the course ends?"
+      ],
+      "answer": "Yes, we offer post-course support through Q&A sessions, discussion forums, and mentorship programs."
+    },
+    {
+      "questions": [
+        "Do I need to install any software before starting my course?"
+      ],
+      "answer": "Some courses require specific software, which will be mentioned in the course details. Our team can assist with installation guidance."
+    },
+    {
+      "questions": [
+        "What languages are your courses available in?"
+      ],
+      "answer": "Most of our courses are in English, but we offer training in other languages upon request."
+    },
+    {
+      "questions": [
+        "How do I enroll in a course?"
+      ],
+      "answer": "You can enroll directly on our website by selecting your course, filling out the registration form, and making the payment."
+    },
+    {
+      "questions": [
+        "Do I need to create an account to enroll?"
+      ],
+      "answer": "Yes, you need to create an account to manage your courses, payments, and certifications."
+    },
+    {
+      "questions": [
+        "Can I transfer my enrollment to another person?"
+      ],
+      "answer": "Yes, enrollment transfers are allowed before the course starts. Contact support for assistance."
+    },
+    {
+      "questions": [
+        "Do you offer trial access to any courses?"
+      ],
+      "answer": "Yes, some of our courses offer free trial access or demo sessions."
+    },
+    {
+      "questions": [
+        "Can I upgrade from a self-paced course to a live instructor-led course?"
+      ],
+      "answer": "Yes, upgrades are possible for select courses. Contact us for details on the upgrade process."
+    },
+    {
+      "questions": [
+        "How do I cancel my enrollment?"
+      ],
+      "answer": "You can request cancellation by contacting our support team. Refund policies apply as per our terms & conditions."
+    },
+    {
+      "questions": [
+        "Are your certifications recognized globally?"
+      ],
+      "answer": "Yes, our certifications are internationally recognized and valued by employers worldwide."
+    },
+    {
+      "questions": [
+        "How will I receive my certificate?"
+      ],
+      "answer": "Certificates are available in digital format and can be downloaded from the LMS. Hard copies are available on request."
+    },
+    {
+      "questions": [
+        "Can I verify a certification issued by Ducis Group?"
+      ],
+      "answer": "Yes, employers and institutions can verify certifications through our online verification portal."
+    },
+    {
+      "questions": [
+        "Do your courses help with industry certification exams?"
+      ],
+      "answer": "Yes, our courses are designed to help you prepare for industry-recognized certifications like AWS, PMP, Cisco, Microsoft, CompTIA, and more."
+    },
+    {
+      "questions": [
+        "How can my company partner with Ducis Group for training?"
+      ],
+      "answer": "We offer partnerships for corporate training, content licensing, and white-label solutions. Contact our business team for collaboration opportunities."
+    },
+    {
+      "questions": [
+        "Can our employees take courses at their own pace?"
+      ],
+      "answer": "Yes, we offer self-paced corporate training that employees can complete at their convenience."
+    },
+    {
+      "questions": [
+        "Can you provide training reports for corporate clients?"
+      ],
+      "answer": "Yes, we provide detailed analytics and progress reports for corporate training programs."
+    },
+    {
+      "questions": [
+        "Do you offer onsite workshops for companies?"
+      ],
+      "answer": "Yes, we conduct onsite workshops and boot camps based on corporate requirements."
+    },
+    {
+      "questions": [
+        "What industries do you cater to for corporate training?"
+      ],
+      "answer": "We serve multiple industries, including IT, healthcare, finance, education, manufacturing, and retail."
+    },
+    {
+      "questions": [
+        "How do I report a technical issue with the website?"
+      ],
+      "answer": "You can report issues via our support chat, email, or helpline."
+    },
+    {
+      "questions": [
+        "I didn’t receive my login details. What should I do?"
+      ],
+      "answer": "Check your spam folder or contact our support team for assistance."
+    },
+    {
+      "questions": [
+        "My video lectures are not loading. How can I fix this?"
+      ],
+      "answer": "Try refreshing the page, clearing your cache, or switching to a different browser. If the issue persists, contact support."
+    },
+    {
+      "questions": [
+        "Do you offer mobile apps for course access?"
+      ],
+      "answer": "Yes, our LMS has a mobile app for easy access to courses on the go."
+    },
+    {
+      "questions": [
+        "Is my personal information secure with Ducis Group?"
+      ],
+      "answer": "Yes, we use secure encryption and strict privacy policies to protect your data."
+    },
+    {
+      "questions": [
+        "Do you offer loyalty rewards for returning customers?"
+      ],
+      "answer": "Yes! We have exclusive discounts and referral bonuses for repeat customers."
+    },
+    {
+      "questions": [
+        "Can I get a discount if I refer a friend?"
+      ],
+      "answer": "Yes, we offer a referral program where you can earn discounts or cash rewards."
+    },
+    {
+      "questions": [
+        "Do you have any student discounts?"
+      ],
+      "answer": "Yes, we offer special discounts for students with valid ID proof."
+    },
+    {
+      "questions": [
+        "Are there seasonal sales or promotions on courses?"
+      ],
+      "answer": "Yes, we run holiday and seasonal promotions with limited-time discounts."
+    },
+    {
+      "questions": [
+        "Do you offer training for freelancers?"
+      ],
+      "answer": "Yes, we have courses designed for freelancers, entrepreneurs, and remote workers."
+    },
+    {
+      "questions": [
+        "Can I add my certification to LinkedIn?"
+      ],
+      "answer": "Yes, you can add our certification to your LinkedIn profile to boost your professional credentials."
+    },
+    {
+      "questions": [
+        "Do you offer internships or work opportunities?"
+      ],
+      "answer": "Yes, we offer internship and project-based opportunities for select courses."
+    },
+    {
+      "questions": [
+        "Can I use my course certificate to apply for jobs?"
+      ],
+      "answer": "Absolutely! Our certificates are recognized by many employers worldwide."
+    },
+    {
+      "questions": [
+        "Will I get soft skills or resume training?"
+      ],
+      "answer": "Yes, we provide additional career guidance, resume writing, and interview preparation sessions."
+    },
+    {
+      "questions": [
+        "What happens if a course is canceled?"
+      ],
+      "answer": "If we cancel a course due to unforeseen circumstances, you will receive a full refund or the option to enroll in another batch."
+    },
+    {
+      "questions": [
+        "Do you offer weekend or evening batches for working professionals?"
+      ],
+      "answer": "Yes, we have weekend and evening classes to accommodate working professionals."
+    },
+    {
+      "questions": [
+        "What happens if the instructor changes mid-course?"
+      ],
+      "answer": "If an instructor change is necessary, we ensure a seamless transition without impacting course quality."
+    },
+    {
+      "questions": [
+        "Can I get private tutoring sessions?"
+      ],
+      "answer": "Yes, we offer one-on-one mentorship and tutoring for certain courses."
+    },
+    {
+      "questions": [
+        "Do you provide course materials in multiple formats (PDF, video, etc.)?"
+      ],
+      "answer": "Yes, course materials are available in PDFs, videos, slides, and case studies."
+    },
+    {
+      "questions": [
+        "How do I download course materials?"
+      ],
+      "answer": "You can download them from the LMS dashboard, where permitted."
+    },
+    {
+      "questions": [
+        "Can I switch from an instructor-led class to a self-paced course?"
+      ],
+      "answer": "Yes, you can switch formats if needed. Contact support for details."
+    },
+    {
+      "questions": [
+        "Can I pay in a different currency?"
+      ],
+      "answer": "Yes, we accept multiple currencies through secure payment gateways."
+    },
+    {
+      "questions": [
+        "Do you offer financial aid or scholarships?"
+      ],
+      "answer": "Yes, we offer scholarships and financial aid for deserving candidates. Apply through our scholarship portal."
+    },
+    {
+      "questions": [
+        "Can I request an installment plan after enrolling?"
+      ],
+      "answer": "Yes, installment plans are available before and after enrollment for select courses."
+    },
+    {
+      "questions": [
+        "What is your refund policy?"
+      ],
+      "answer": "Refunds are processed based on our terms and conditions. Check our refund policy page for details."
+    },
+    {
+      "questions": [
+        "How long does it take to process a refund?"
+      ],
+      "answer": "Refunds typically take 5-7 business days, depending on your payment method."
+    },
+    {
+      "questions": [
+        "Do you offer industry-specific training (finance, healthcare, etc.)?"
+      ],
+      "answer": "Yes, we have specialized courses for finance, healthcare, IT, and other industries."
+    },
+    {
+      "questions": [
+        "Can you help with skill development for career changers?"
+      ],
+      "answer": "Yes, we offer career guidance for professionals transitioning into tech or other industries."
+    },
+    {
+      "questions": [
+        "Do your courses meet corporate compliance training requirements?"
+      ],
+      "answer": "Yes, we offer courses that align with corporate compliance standards."
+    },
+    {
+      "questions": [
+        "Do you offer training in digital marketing, UI/UX, or product management?"
+      ],
+      "answer": "Yes, we provide courses in digital marketing, UI/UX design, product management, and more."
+    },
+    {
+      "questions": [
+        "Do you have courses on emerging technologies (AI, blockchain, etc.)?"
+      ],
+      "answer": "Yes, we offer courses in AI, blockchain, IoT, quantum computing, and other cutting-edge fields."
+    },
+    {
+      "questions": [
+        "Can I network with other learners?"
+      ],
+      "answer": "Yes, we have community forums, LinkedIn groups, and networking events."
+    },
+    {
+      "questions": [
+        "Do you provide access to job postings?"
+      ],
+      "answer": "Yes, enrolled students get access to exclusive job listings and recruiter networks."
+    },
+    {
+      "questions": [
+        "Is there an alumni program?"
+      ],
+      "answer": "Yes, we offer an alumni network with continued learning and career support."
+    },
+    {
+      "questions": [
+        "Can I become a mentor for new learners?"
+      ],
+      "answer": "Yes, experienced learners can apply for our peer mentorship program."
+    },
+    {
+      "questions": [
+        "Do you have guest lectures from industry experts?"
+      ],
+      "answer": "Yes, we regularly host guest sessions with industry leaders."
+    },
+    {
+      "questions": [
+        "Do you support screen readers and accessibility tools?"
+      ],
+      "answer": "Yes, our platform is designed for accessibility, including screen reader support."
+    },
+    {
+      "questions": [
+        "Can I integrate my LMS progress with LinkedIn Learning or Udemy?"
+      ],
+      "answer": "Currently, we do not support direct integration, but you can showcase your certifications on LinkedIn."
+    },
+    {
+      "questions": [
+        "Do you support AI-based learning recommendations?"
+      ],
+      "answer": "Yes, our LMS suggests courses based on your learning patterns and career goals."
+    },
+    {
+      "questions": [
+        "Can I request a feature update for the LMS?"
+      ],
+      "answer": "Yes, we welcome suggestions for improving the platform. Contact our support team with your ideas."
+    },
+    {
+      "questions": [
+        "How do you ensure compliance with GDPR and data privacy laws?"
+      ],
+      "answer": "We follow strict data protection policies and comply with GDPR, CCPA, and other global standards."
+    },
+    {
+      "questions": [
+        "Can I delete my account and personal data?"
+      ],
+      "answer": "Yes, you can request account deletion through our support team."
+    },
+    {
+      "questions": [
+        "Are my payment details stored securely?"
+      ],
+      "answer": "Yes, all payments are processed through secure, PCI-compliant gateways."
+    },
+    {
+      "questions": [
+        "Do you share my personal data with third parties?"
+      ],
+      "answer": "No, we do not sell or share your personal data with third parties without your consent."
+    }
+  ]
 }

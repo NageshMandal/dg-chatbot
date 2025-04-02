@@ -6,15 +6,44 @@ const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 const callbacks = require("./callback");
 const path = require("path");
+const mongoose = require("mongoose");
+const ChatLog = require("./models/ChatLog");
 
-const app = express();
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// -------------------------------
+// MongoDB Setup using Mongoose
 
-const userSessions = {};
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/chatbot";
+mongoose.connect(MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => console.log("✅ Connected to MongoDB"))
+  .catch((err) => console.error("❌ MongoDB connection error:", err));
+
+// -------------------------------
+// NLP & Conversation Tree Setup
+
+const { NlpManager } = require("node-nlp");
+const manager = new NlpManager({ languages: ['en'] });
 const qaTree = JSON.parse(fs.readFileSync("./questions.json", "utf-8"));
 
+// Add FAQ data to NLP manager if available
+if (qaTree.faqData && Array.isArray(qaTree.faqData)) {
+  qaTree.faqData.forEach((faq, index) => {
+    const intent = `faq_${index}`;
+    faq.questions.forEach(utterance => {
+      manager.addDocument('en', utterance, intent);
+    });
+    manager.addAnswer('en', intent, faq.answer);
+  });
+  (async () => {
+    await manager.train();
+    manager.save();
+    console.log("✅ NLP Manager trained and ready.");
+  })();
+}
+
+// Prepare intent patterns
 const intentPatterns = (qaTree.intent_patterns || []).map(p => ({
   pattern: new RegExp(p.pattern, "i"),
   node: p.node
@@ -30,7 +59,6 @@ function getIntentNode(message) {
 
 function getNextQuestion(state, userAnswer) {
   const currentNode = state.currentNode ?? null;
-
   if (!currentNode) {
     return {
       nextNode: "start",
@@ -41,10 +69,23 @@ function getNextQuestion(state, userAnswer) {
       card: qaTree["start"].card || null
     };
   }
-
-  const option = qaTree[currentNode]?.options?.[userAnswer] || {};
+  const currentNodeData = qaTree[currentNode];
+  if (currentNodeData.input === "form") {
+    const optionKeys = Object.keys(currentNodeData.options || {});
+    const defaultOptionKey = optionKeys[0];
+    const nextNode = currentNodeData.options[defaultOptionKey].next || null;
+    return {
+      nextNode,
+      question: qaTree[nextNode].question,
+      options: Object.keys(qaTree[nextNode].options || {}),
+      input: qaTree[nextNode].input || null,
+      placeholder: qaTree[nextNode].placeholder || "",
+      card: qaTree[nextNode].card || null,
+      callback: currentNodeData.options[defaultOptionKey].callback || null
+    };
+  }
+  const option = currentNodeData.options?.[userAnswer] || {};
   const nextNode = option.next || null;
-
   if (!nextNode) {
     const intentNode = getIntentNode(userAnswer);
     if (intentNode && qaTree[intentNode]) {
@@ -66,7 +107,6 @@ function getNextQuestion(state, userAnswer) {
       card: null
     };
   }
-
   const node = qaTree[nextNode];
   return {
     nextNode,
@@ -79,13 +119,20 @@ function getNextQuestion(state, userAnswer) {
   };
 }
 
-// Serve static chatbot HTML
+const app = express();
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// In-memory session store
+const userSessions = {};
+
+// Serve static chatbot HTML from /chatbot directory
 app.use("/chatbot", express.static(path.join(__dirname, "public")));
 
 app.post("/chat", upload.single("file"), async (req, res) => {
   const { user_id, message = "", input_data = "" } = req.body;
   const sessionId = user_id || uuidv4();
-
   if (!userSessions[sessionId]) {
     userSessions[sessionId] = {
       currentNode: null,
@@ -93,29 +140,40 @@ app.post("/chat", upload.single("file"), async (req, res) => {
       tempForm: {}
     };
   }
-
   const session = userSessions[sessionId];
   const inputValue = input_data || message;
-
-  // Handle file upload message fallback
   let msgToProcess = message;
   if (req.file && !req.body.message) {
     msgToProcess = `File uploaded: ${req.file.originalname}`;
   }
-
-  // Update session data with actual input value for enrollment
+  if (session.history.length > 0 && session.history[session.history.length - 1].user === msgToProcess) {
+    session.currentNode = null;
+  }
   if (session.currentNode === "enroll_itil") {
     session.tempForm.name = inputValue;
   }
   if (session.currentNode === "enroll_itil_email") {
     session.tempForm.email = inputValue;
   }
-
   const result = getNextQuestion(session, msgToProcess);
   session.currentNode = result.nextNode;
   session.history.push({ user: msgToProcess, bot: result.question });
-
-  // Trigger callback if defined
+  if (result.nextNode === null) {
+    const nlpResult = await manager.process("en", msgToProcess);
+    if (nlpResult.intent !== "None" && nlpResult.score > 0.6 && nlpResult.answer) {
+      session.history.push({ user: msgToProcess, bot: nlpResult.answer });
+      return res.json({
+        session_id: sessionId,
+        question: nlpResult.answer,
+        options: ["Main Menu"],
+        input: null,
+        placeholder: "",
+        card: null,
+        callback: null,
+        completed: false
+      });
+    }
+  }
   if (result.callback && callbacks[result.callback]) {
     try {
       await callbacks[result.callback]({
@@ -128,7 +186,6 @@ app.post("/chat", upload.single("file"), async (req, res) => {
       console.error("❌ Callback error:", err.message);
     }
   }
-
   return res.json({
     session_id: sessionId,
     question: result.question,
@@ -139,6 +196,30 @@ app.post("/chat", upload.single("file"), async (req, res) => {
     callback: result.callback || null,
     completed: result.nextNode === null
   });
+});
+
+// /saveChat endpoint now uses express.text() to capture raw text from sendBeacon
+app.post("/saveChat", (req, res) => {
+  console.log("Received /saveChat body:", req.body);
+  const { session_id, chatContent } = req.body;
+  if (!session_id || typeof chatContent !== "string") {
+    console.error("Invalid data received.");
+    return res.status(400).json({ status: "error", message: "Invalid data" });
+  }
+  const chatLog = new ChatLog({
+    session_id,
+    chatContent,
+    savedAt: new Date()
+  });
+  chatLog.save()
+    .then(() => {
+      console.log("Chat saved to MongoDB for session:", session_id);
+      res.json({ status: "success", message: "Chat saved to MongoDB" });
+    })
+    .catch((err) => {
+      console.error("Error saving chat to MongoDB:", err);
+      res.status(500).json({ status: "error", message: "Failed to save chat" });
+    });
 });
 
 app.get("/status", (req, res) => {
