@@ -1,3 +1,4 @@
+// server.js
 const express = require("express");
 const cors = require("cors");
 const { v4: uuidv4 } = require("uuid");
@@ -12,7 +13,7 @@ const ChatLog = require("./models/ChatLog");
 // -------------------------------
 // MongoDB Setup using Mongoose
 
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/chatbot";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb+srv://evergreennageshmandal:PyZcB5j9RXTF37GT@cluster0.fj58uah.mongodb.net/";
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -31,7 +32,7 @@ const qaTree = JSON.parse(fs.readFileSync("./questions.json", "utf-8"));
 if (qaTree.faqData && Array.isArray(qaTree.faqData)) {
   qaTree.faqData.forEach((faq, index) => {
     const intent = `faq_${index}`;
-    faq.questions.forEach(utterance => {
+    faq.questions.forEach((utterance) => {
       manager.addDocument('en', utterance, intent);
     });
     manager.addAnswer('en', intent, faq.answer);
@@ -124,21 +125,47 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// In-memory session store
+// In-memory session store for conversation state
 const userSessions = {};
 
 // Serve static chatbot HTML from /chatbot directory
 app.use("/chatbot", express.static(path.join(__dirname, "public")));
 
-app.post("/chat", upload.single("file"), async (req, res) => {
-  const { user_id, message = "", input_data = "" } = req.body;
-  const sessionId = user_id || uuidv4();
-  if (!userSessions[sessionId]) {
+// --- NEW /startChat Endpoint ---
+// Creates a new conversation document using userInfo (from either logged-in or guest user).
+app.post('/startChat', async (req, res) => {
+  let sessionId = req.body.session_id || uuidv4();
+  // Expecting userInfo to be provided by the frontend
+  const userInfo = req.body.userInfo || {};
+  
+  const newChat = new ChatLog({
+    session_id: sessionId,
+    userInfo: userInfo,
+    messages: [],
+    startedAt: new Date(),
+    closed: false
+  });
+  try {
+    await newChat.save();
+    // Initialize in-memory session state
     userSessions[sessionId] = {
       currentNode: null,
       history: [],
       tempForm: {}
     };
+    res.json({ session_id: sessionId, message: 'Chat started' });
+  } catch (err) {
+    console.error("Error starting chat:", err);
+    res.status(500).json({ error: "Failed to start chat" });
+  }
+});
+
+// --- /chat Endpoint ---
+app.post("/chat", upload.single("file"), async (req, res) => {
+  const { user_id, message = "", input_data = "" } = req.body;
+  const sessionId = user_id;
+  if (!sessionId || !userSessions[sessionId]) {
+    return res.status(400).json({ error: "Session not found. Please start a new chat." });
   }
   const session = userSessions[sessionId];
   const inputValue = input_data || message;
@@ -146,6 +173,18 @@ app.post("/chat", upload.single("file"), async (req, res) => {
   if (req.file && !req.body.message) {
     msgToProcess = `File uploaded: ${req.file.originalname}`;
   }
+  
+  // Append user's message to DB
+  try {
+    await ChatLog.findOneAndUpdate(
+      { session_id: sessionId, closed: false },
+      { $push: { messages: { sender: "user", text: msgToProcess, timestamp: new Date() } } }
+    );
+  } catch (err) {
+    console.error("Error saving user message:", err);
+  }
+  
+  // Update conversation state if necessary
   if (session.history.length > 0 && session.history[session.history.length - 1].user === msgToProcess) {
     session.currentNode = null;
   }
@@ -155,13 +194,20 @@ app.post("/chat", upload.single("file"), async (req, res) => {
   if (session.currentNode === "enroll_itil_email") {
     session.tempForm.email = inputValue;
   }
+  
   const result = getNextQuestion(session, msgToProcess);
   session.currentNode = result.nextNode;
   session.history.push({ user: msgToProcess, bot: result.question });
+  
+  // If no next node, try using NLP
   if (result.nextNode === null) {
     const nlpResult = await manager.process("en", msgToProcess);
     if (nlpResult.intent !== "None" && nlpResult.score > 0.6 && nlpResult.answer) {
       session.history.push({ user: msgToProcess, bot: nlpResult.answer });
+      await ChatLog.findOneAndUpdate(
+        { session_id: sessionId, closed: false },
+        { $push: { messages: { sender: "bot", text: nlpResult.answer, timestamp: new Date() } } }
+      );
       return res.json({
         session_id: sessionId,
         question: nlpResult.answer,
@@ -174,6 +220,8 @@ app.post("/chat", upload.single("file"), async (req, res) => {
       });
     }
   }
+  
+  // Invoke callback if defined
   if (result.callback && callbacks[result.callback]) {
     try {
       await callbacks[result.callback]({
@@ -186,6 +234,17 @@ app.post("/chat", upload.single("file"), async (req, res) => {
       console.error("❌ Callback error:", err.message);
     }
   }
+  
+  // Append bot response to DB
+  try {
+    await ChatLog.findOneAndUpdate(
+      { session_id: sessionId, closed: false },
+      { $push: { messages: { sender: "bot", text: result.question, timestamp: new Date() } } }
+    );
+  } catch (err) {
+    console.error("Error saving bot message:", err);
+  }
+  
   return res.json({
     session_id: sessionId,
     question: result.question,
@@ -198,28 +257,30 @@ app.post("/chat", upload.single("file"), async (req, res) => {
   });
 });
 
-// /saveChat endpoint now uses express.text() to capture raw text from sendBeacon
-app.post("/saveChat", (req, res) => {
-  console.log("Received /saveChat body:", req.body);
-  const { session_id, chatContent } = req.body;
-  if (!session_id || typeof chatContent !== "string") {
-    console.error("Invalid data received.");
-    return res.status(400).json({ status: "error", message: "Invalid data" });
+// --- /closeChat Endpoint ---
+app.post("/closeChat", async (req, res) => {
+  const { session_id } = req.body;
+  try {
+    await ChatLog.findOneAndUpdate(
+      { session_id },
+      { closed: true, closedAt: new Date() }
+    );
+    res.json({ status: "Chat closed" });
+  } catch (err) {
+    console.error("Error closing chat:", err);
+    res.status(500).json({ error: "Failed to close chat" });
   }
-  const chatLog = new ChatLog({
-    session_id,
-    chatContent,
-    savedAt: new Date()
-  });
-  chatLog.save()
-    .then(() => {
-      console.log("Chat saved to MongoDB for session:", session_id);
-      res.json({ status: "success", message: "Chat saved to MongoDB" });
-    })
-    .catch((err) => {
-      console.error("Error saving chat to MongoDB:", err);
-      res.status(500).json({ status: "error", message: "Failed to save chat" });
-    });
+});
+
+// GET /chatlogs – Fetch all chat logs and return them in JSON
+app.get("/chatlogs", async (req, res) => {
+  try {
+    const chatLogs = await ChatLog.find().sort({ startedAt: -1 });
+    res.json({ success: true, chatLogs });
+  } catch (err) {
+    console.error("Error fetching chat logs:", err);
+    res.status(500).json({ success: false, error: err.message });
+  }
 });
 
 app.get("/status", (req, res) => {

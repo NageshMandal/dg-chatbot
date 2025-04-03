@@ -12,15 +12,13 @@
       height: 100vh;
       overflow: hidden;
     }
-    
     .chat-container {
-      display: none; /* Hide chat on load */
+      display: none;
       position: fixed;
       bottom: 20px;
       right: 20px;
       z-index: 1000;
     }
-    
     .chat-widget {
       width: 360px;
       height: 600px;
@@ -31,7 +29,6 @@
       flex-direction: column;
       overflow: hidden;
     }
-    
     .chat-header {
       background: #0d6efd;
       color: #fff;
@@ -42,19 +39,16 @@
       font-size: 16px;
       font-weight: 600;
     }
-    
     .chat-header-left {
       display: flex;
       align-items: center;
     }
-    
     .chat-header img {
       width: 28px;
       height: 28px;
       border-radius: 50%;
       margin-right: 8px;
     }
-    
     .close-btn {
       background: transparent;
       border: none;
@@ -63,7 +57,6 @@
       cursor: pointer;
       outline: none;
     }
-    
     .chat-body {
       flex-grow: 1;
       padding: 16px;
@@ -73,7 +66,6 @@
       flex-direction: column;
       scroll-behavior: smooth;
     }
-    
     .message {
       max-width: 80%;
       padding: 10px 14px;
@@ -84,40 +76,32 @@
       position: relative;
       font-size: 14px;
     }
-    
     .bot {
       align-self: flex-start;
       background: #eaf0f5;
       color: #506579;
     }
-    
     .user {
       align-self: flex-end;
       background: #0d6efd;
       color: #ffffff;
     }
-    
     .timestamp {
       display: block;
       font-size: 11px;
       color: #acacac;
       margin-top: 4px;
     }
-    
     .chat-footer {
       background: #ffffff;
       padding: 8px 12px;
-      /* We no longer use flex here; instead we’ll create separate containers */
     }
-    
-    /* Options container styling */
     #optionsContainer {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
       margin-bottom: 8px;
     }
-    
     #optionsContainer button {
       padding: 8px 16px;
       background: #ffffff;
@@ -129,19 +113,15 @@
       outline: none;
       transition: background 0.2s, border-color 0.2s;
     }
-    
     #optionsContainer button:hover {
       background: #dfe3e8;
       border-color: #bec2c6;
     }
-    
-    /* Input container styling */
     #inputContainer {
       display: flex;
       align-items: center;
       gap: 8px;
     }
-    
     #inputContainer input[type="text"],
     #inputContainer textarea {
       flex-grow: 1;
@@ -154,18 +134,15 @@
       background: #fff;
       transition: border-color 0.2s;
     }
-    
     #inputContainer input[type="text"]:focus,
     #inputContainer textarea:focus {
       border-color: #415a76;
     }
-    
     #inputContainer input[type="file"] {
       font-size: 14px;
       border: none;
       cursor: pointer;
     }
-    
     #inputContainer button {
       padding: 8px 16px;
       border: none;
@@ -177,12 +154,9 @@
       outline: none;
       transition: background 0.2s;
     }
-    
     #inputContainer button:hover {
       background: #006ae0;
     }
-    
-    /* Chat toggle button styling */
     #chatToggleBtn {
       position: fixed;
       bottom: 20px;
@@ -199,12 +173,9 @@
       transition: transform 0.2s ease;
       display: block;
     }
-    
     #chatToggleBtn:hover {
       transform: scale(1.05);
     }
-    
-    /* Start Chat button styling */
     #startChatButton {
       background-color: #0d6efd;
       color: #fff;
@@ -217,11 +188,9 @@
       margin: 0 auto;
       display: block;
     }
-    
     #startChatButton:hover {
       background-color: #006ae0;
     }
-    
     .chat-widget-footer {
       text-align: center;
       font-size: 12px;
@@ -229,10 +198,34 @@
       padding: 8px 0;
       background: #ffffff;
     }
+    /* Guest form styling */
+    #guestForm {
+      display: none;
+      padding: 12px;
+      border-top: 1px solid #ced0d4;
+    }
+    #guestForm input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 8px;
+      border: 1px solid #ced0d4;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    #guestForm button {
+      width: 100%;
+      padding: 10px;
+      background: #0d6efd;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
-  <!-- Chat Toggle Button to Open Chat Container -->
+  <!-- Chat Toggle Button -->
   <button id="chatToggleBtn" onclick="openChat()"></button>
 
   <div class="chat-container" id="chatContainer">
@@ -244,15 +237,18 @@
         </div>
         <button class="close-btn" onclick="closeChat()">×</button>
       </div>
-
       <div class="chat-body" id="chat"></div>
-
-      <!-- Chat footer will contain separate containers for options and input -->
       <div class="chat-footer" id="chatFooter">
-        <!-- Initially, display only the Start Chat button -->
+        <!-- Guest form will be inserted here if user is not logged in -->
+        <div id="guestForm">
+          <input type="text" id="guestName" placeholder="Your Name" />
+          <input type="email" id="guestEmail" placeholder="Your Email" />
+          <input type="text" id="guestContact" placeholder="Your Contact" />
+          <button onclick="submitGuestDetails()">Submit Details</button>
+        </div>
+        <!-- Start Chat button -->
         <button id="startChatButton" onclick="startChat()">Start Chat</button>
       </div>
-
       <div class="chat-widget-footer">
         Powered by shunya.ek
       </div>
@@ -260,6 +256,58 @@
   </div>
 
   <script>
+    const BASE_URL = "https://unbelong.in";
+
+    // This function fetches user details if the user is logged in.
+    async function displayUserDetails() {
+      const userId = localStorage.getItem("userId");
+      if (!userId) {
+        console.error("User ID not found in local storage.");
+        return;
+      }
+      try {
+        const apiUrl = `${BASE_URL}/api/auth/user/${userId}`;
+        const response = await fetch(apiUrl, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        if (response.status === 404) {
+          console.error("User not found. Check if the user ID exists in the database.");
+          return;
+        }
+        if (!response.ok) {
+          throw new Error(`Failed to fetch user details. HTTP Status: ${response.status}`);
+        }
+        const { user, success } = await response.json();
+        if (!success || !user) {
+          console.error("Failed to retrieve user details. Ensure the user exists.");
+          return;
+        }
+        // Optionally display user details on the page
+        // For example, you can update elements with IDs: userName, userEmail, etc.
+        document.getElementById("userName") && (document.getElementById("userName").textContent = user.name);
+        document.getElementById("userEmail") && (document.getElementById("userEmail").textContent = user.email);
+        document.getElementById("userContact") && (document.getElementById("userContact").textContent = user.phone);
+        document.getElementById("userAddress") && (document.getElementById("userAddress").textContent = user.country);
+        
+        // Store details for chat use.
+        window.currentUser = {
+          name: user.name,
+          email: user.email,
+          contact: user.phone,
+          address: user.country
+        };
+      } catch (error) {
+        console.error("Error fetching user details:", error);
+      }
+    }
+
+    // On DOMContentLoaded, attempt to load user details (if logged in)
+    window.addEventListener("DOMContentLoaded", displayUserDetails);
+
     let sessionId = null;
     let currentInputType = "text";
     let currentPlaceholder = "Type your question...";
@@ -279,21 +327,17 @@
       const messageDiv = document.createElement("div");
       messageDiv.className = "message " + sender;
       messageDiv.textContent = text;
-
       const timestamp = document.createElement("div");
       timestamp.className = "timestamp";
       timestamp.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
       messageDiv.appendChild(timestamp);
       chat.appendChild(messageDiv);
       chat.scrollTop = chat.scrollHeight;
     }
 
-    // Renders only the input portion into #inputContainer
     function renderInput() {
       const inputContainer = document.getElementById("inputContainer");
-      inputContainer.innerHTML = ""; // Clear only the input container
-
+      inputContainer.innerHTML = "";
       if (currentInputType === "file") {
         const fileInput = document.createElement("input");
         fileInput.type = "file";
@@ -310,7 +354,6 @@
         formInput.id = "userInput";
         formInput.placeholder = currentPlaceholder;
         inputContainer.appendChild(formInput);
-        // Trigger default option on Enter key.
         formInput.addEventListener("keydown", function(e) {
           if (e.key === "Enter") {
             e.preventDefault();
@@ -325,22 +368,18 @@
         textInput.type = "text";
         textInput.id = "userInput";
         textInput.placeholder = currentPlaceholder;
-
         const sendButton = document.createElement("button");
         sendButton.type = "button";
         sendButton.textContent = "Send";
         sendButton.onclick = handleInput;
-
         inputContainer.appendChild(textInput);
         inputContainer.appendChild(sendButton);
       }
     }
 
-    // Updates the options container with buttons
     function updateOptions(optionsArray) {
       const optionsContainer = document.getElementById("optionsContainer");
-      optionsContainer.innerHTML = ""; // Clear previous options
-
+      optionsContainer.innerHTML = "";
       if (optionsArray && optionsArray.length > 0) {
         for (let i = 0; i < optionsArray.length; i++) {
           const opt = optionsArray[i];
@@ -378,7 +417,6 @@
       if (message) {
         appendMessage(message, "user");
       }
-
       let formData;
       let options = { method: "POST" };
       if (file) {
@@ -391,14 +429,11 @@
         options.headers = { "Content-Type": "application/json" };
         options.body = JSON.stringify({ user_id: sessionId, message: message });
       }
-
       const response = await fetch("http://localhost:3000/chat", options);
       const data = await response.json();
       sessionId = data.session_id;
-
       appendMessage(data.question, "bot");
 
-      // Card injection (if available)
       if (data.card) {
         const chat = document.getElementById("chat");
         const card = data.card;
@@ -423,9 +458,6 @@
         chat.appendChild(cardDiv);
         chat.scrollTop = chat.scrollHeight;
       }
-
-      console.log("Server response:", data);
-
       updateOptions(data.options);
       currentInputType = data.input ? data.input : "text";
       currentPlaceholder = data.placeholder ? data.placeholder : "Type your message...";
@@ -442,7 +474,7 @@
     }
 
     async function initChat() {
-      // Initialize the chat conversation once Start Chat is clicked.
+      // Fetch initial message after chat start.
       const response = await fetch("http://localhost:3000/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -450,49 +482,80 @@
       });
       const data = await response.json();
       sessionId = data.session_id;
-
       appendMessage(data.question, "bot");
 
-      // Build the chat footer with two separate containers.
       const chatFooter = document.getElementById("chatFooter");
       chatFooter.innerHTML = "";
-
-      // Create options container.
       const optionsContainer = document.createElement("div");
       optionsContainer.className = "options";
       optionsContainer.id = "optionsContainer";
       chatFooter.appendChild(optionsContainer);
-
-      // Create input container.
       const inputContainer = document.createElement("div");
       inputContainer.className = "input-container";
       inputContainer.id = "inputContainer";
       chatFooter.appendChild(inputContainer);
-
       updateOptions(data.options);
       currentInputType = data.input ? data.input : "text";
       currentPlaceholder = data.placeholder ? data.placeholder : "Type your message...";
       renderInput();
     }
 
-    // Triggered when the user clicks the "Start Chat" button.
-    function startChat() {
-      const chatFooter = document.getElementById("chatFooter");
-      chatFooter.innerHTML = ""; // Remove the Start Chat button.
+    // This function is called if no user is logged in.
+    // It shows the guest details form.
+    function showGuestForm() {
+      document.getElementById("guestForm").style.display = "block";
+    }
+
+    // Called when guest submits details.
+    function submitGuestDetails() {
+      const name = document.getElementById("guestName").value.trim();
+      const email = document.getElementById("guestEmail").value.trim();
+      const contact = document.getElementById("guestContact").value.trim();
+      if (!name || !email) {
+        alert("Please enter at least your name and email.");
+        return;
+      }
+      // Set the guest details in a global variable.
+      window.currentUser = {
+        name,
+        email,
+        contact
+      };
+      // Hide the guest form.
+      document.getElementById("guestForm").style.display = "none";
+      // Proceed to start chat.
+      startChat();
+    }
+
+    // When "Start Chat" is clicked, check if user is logged in.
+    // If logged in, window.currentUser should already be set.
+    // Otherwise, show the guest form.
+    async function startChat() {
+      if (!window.currentUser) {
+        // If no logged-in user, show the guest details form.
+        showGuestForm();
+        return;
+      }
+      // Send the user info (logged in or guest) with the startChat request.
+      const response = await fetch("http://localhost:3000/startChat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ session_id: sessionId, userInfo: window.currentUser })
+      });
+      const data = await response.json();
+      sessionId = data.session_id;
+      // Remove the Start Chat button (and guest form if visible) and initialize chat.
+      document.getElementById("chatFooter").innerHTML = "";
       initChat();
     }
 
-    // Optionally, you may auto-initiate the chat on load:
-    // initChat();
-  </script>
-  <script>
+    // On page unload, close the chat.
     window.addEventListener("beforeunload", function () {
       if (sessionId) {
-        const chatContent = document.getElementById("chat").innerHTML;
-        fetch("http://localhost:3000/saveChat", {
+        fetch("http://localhost:3000/closeChat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ session_id: sessionId, chatContent }),
+          body: JSON.stringify({ session_id: sessionId }),
           keepalive: true
         });
       }
